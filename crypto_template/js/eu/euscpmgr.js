@@ -73,7 +73,7 @@ var EUSignCPMgr = NewClass({
                         }
                         setTimeout(_readPrivateKeyAsStoredFile, 10);
                     }
-
+                    euSignMgr.afterInitialize();
                     setStatus('');
                 } catch (e) {
                     console.log(e);
@@ -87,6 +87,12 @@ var EUSignCPMgr = NewClass({
             };
 
             euSignMgr.loadCAsSettings(_onSuccess, _onError);
+        },
+        afterInitialize: function () {
+            if(localData.sign)
+                euSignMgr.verifyData();
+            else
+                euSignMgr.uiSignPanel.style.display = '';
         },
         loadCAsSettings: function (onSuccess, onError) {
             var pThis = this;
@@ -1100,18 +1106,12 @@ function saveFile(fileName, array) {
 
 function pageLoaded() {
     euSignMgr.uiPkFileInput.addEventListener('change', euSignMgr.selectPrivateKeyFile, false);
-
 }
 
 // init call after initialize euscp.js
 function EUSignCPModuleInitialized(isInitialized) {
-    if (isInitialized) {
+    if (isInitialized)
         euSignMgr.initialize();
-        if(localData.sign)
-            euSignMgr.verifyData();
-        else
-            euSignMgr.uiSignPanel.style.display = '';
-    }
     else
         setKeyStatus("Криптографічну бібліотеку не ініціалізовано", 'error');
 }

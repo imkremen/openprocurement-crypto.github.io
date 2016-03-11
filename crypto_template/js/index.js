@@ -1,6 +1,7 @@
 var localData = {};
 
 function initCryptoTemplate(initObj) {
+    localData = {};
     var useJsonp = false;
     //
     localData.callbackPostSign = initObj.callbackPostSign || 'console.log';
@@ -18,6 +19,7 @@ function initCryptoTemplate(initObj) {
     var url = initObj.apiResourceUrl;
     if (!url)
         url = initObj.apiUrl + initObj.objType + '/' + initObj.objId;
+    localData.apiResourceUrl = url;
     var urlDocs = url + "/documents";
     var ajaxParamsObj = {url: url};
     var ajaxParamsDocs = {url: urlDocs};
