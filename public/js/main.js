@@ -33,7 +33,7 @@ function demo4()
 
 // optional, render html
 function renderJson(data){
-    console.log('renderJson', data);
+    //console.log('renderJson', data);
 }
 
 function postSign(signature) {

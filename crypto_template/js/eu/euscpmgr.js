@@ -499,7 +499,7 @@ var EUSignCPMgr = NewClass({
             }
 
             try {
-                if (euSignMgr.uiPkReadBtn.innerText == 'Зчитати') {
+                if (euSignMgr.uiPkReadBtn.title == 'Зчитати') {
                     setStatus('Зчитування ключа');
                     setKeyStatus('Зчитування ключа, зачекайте...', 'info');
                     var files = euSignMgr.uiPkFileInput.files;

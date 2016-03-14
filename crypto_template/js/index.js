@@ -2,6 +2,7 @@ var localData = {};
 
 function initCryptoTemplate(initObj) {
     localData = {};
+    //$.ajaxSetup({'cache': true});
     var useJsonp = false;
     //
     localData.callbackPostSign = initObj.callbackPostSign || 'console.log';
@@ -34,7 +35,8 @@ function initCryptoTemplate(initObj) {
     var promiseGetData = $.ajax(ajaxParamsObj);
     var promiseGetDocuments = $.ajax(ajaxParamsDocs);
 
-    var loadTemplate = function(objectData){
+    var loadTemplate = function (objectData) {
+
         placeholderEl.load('crypto_template/sign.html');
         if (!useJsonp)
             window[callbackRender](objectData);
@@ -56,7 +58,7 @@ function initCryptoTemplate(initObj) {
                 });
             }
         }
-        if(!isSignPresent) loadTemplate(objectData);
+        if (!isSignPresent) loadTemplate(objectData);
     };
     var callbackFailure = function (data, statusText, jqXHR) {
         errorBlock.append(String.format(resources$ua.getFromApiError, data, statusText));
@@ -88,10 +90,16 @@ if (!String.format) {
     };
 }
 
-// prepare object for sign - remove field dateModified and documents with signature
+// prepare object for sign
 function prepareObject(json_object) {
-    var result = json_object;
-    delete result['dateModified'];
+    var fields = ['documents', 'items', 'lots', 'features', 'enquiryPeriod', 'tenderPeriod',
+        'procuringEntity', 'title', 'title_en', 'title_ru', 'description', 'description_ru',
+        'description_en', 'value', 'minimalStep', 'procurementMethod', 'procurementMethodType',
+        'id', 'tenderID'];
+    var result = {};
+    for (var i = 0; i < fields.length; i++) {
+        if (json_object[fields[i]] !== undefined) result[fields[i]] = json_object[fields[i]];
+    }
     // delete documents with signature
     if (json_object.documents) {
         for (var index = json_object.documents.length - 1; index >= 0; index--) {
@@ -100,8 +108,13 @@ function prepareObject(json_object) {
                 result.documents.splice(index, 1);
             }
         }
-        if(result.documents.length === 0)
-            delete result['documents'];
+        if (!result.documents.length) delete result['documents'];
+    }
+    if (result.lots && result.lots.length) {
+        for (var i = 0; i < result.lots.length; i++) {
+            if (result.lots[i].auctionPeriod) delete result.lots[i]['auctionPeriod'];
+            if (result.lots[i].auctionUrl) delete result.lots[i]['auctionUrl'];
+        }
     }
     return JSON.stringify(result);
 }
