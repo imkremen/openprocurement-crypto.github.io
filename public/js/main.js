@@ -76,6 +76,7 @@ function renderJson(data) {
  * @param {object} signData - json object from signature
  * @param {object} currData - json object from database
  * @param {object} diff     - difference, json object (undefined if equal), see https://github.com/benjamine/jsondiffpatch
+ * @param {object} obj      - reference to main lib
  */
 function checkSign(signData, currData, diff, obj) {
     //console.log('externalcheckSign', diff);
