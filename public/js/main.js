@@ -18,12 +18,21 @@ var options = {
     /* callback after verify signature */
     callbackCheckSign: "checkSign",
     /* using jsondiffpatch-formatters for render difference */
-    userJsonDiffHtml : true
+    userJsonDiffHtml: true,
+    /* custom ajaxOptions options */
+    ajaxOptions: {'global': false}
 }
 
 $(function () {
+    /*$(document).bind("ajaxSend", function(arg1, arg2, ajax){
+        console.log('ajaxSend', ajax);
+    }).bind("ajaxComplete", function(){
+        console.log('ajaxComplete1');
+    });*/
     /* {string} custom html for render */
     //options.customHtmlTemplate = $('#htmlTemplate').text();
+    // test work CORS from page
+    // $.ajax({url:'https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/b64001cdaa1540e7a17c14d0207e3feb'}).done(function(data){ console.log(data); });
 });
 
 /**
@@ -98,7 +107,6 @@ function postSign(signature) {
     // setKeyStatus('Помилка при передачі підпису до ЦБД', 'error');
 }
 
-
 // demo calls
 function demo1() {
     options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/b64001cdaa1540e7a17c14d0207e3feb";
@@ -112,8 +120,15 @@ function demo3() {
     options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/9835f4f342f04b22aaaf2c40f25cfe80";
     opSign.init(options);
 }
-
 function demo4() {
     options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/0.12/tenders/fae0de97deab4b289f0b53bb64e8e09b";
+    opSign.init(options);
+}
+function demo5() {
+    options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/2.1/plans/8d80e519291c4b74930da8f8808489d7";
+    opSign.init(options);
+}
+function demo6() {
+    options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/2.1/plans/51250d165c3e4baba4f6aed801b5a8a7";
     opSign.init(options);
 }
