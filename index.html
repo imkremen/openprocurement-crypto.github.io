@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Using digital signature</title>
     <script src="public/js/lib/jquery.min.js"></script>
-    <script src="https://rawgit.com/openprocurement-crypto/common/master/js/index.js?v0.2"></script>
+    <script src="https://cdn.rawgit.com/openprocurement-crypto/common/v.0.0.7/js/index.js"></script>
+    <!--<script src="https://rawgit.com/openprocurement-crypto/common/master/js/index.js?v0.2"></script>-->
     <!--<script src="http://10.10.10.97:8083/js/index.js?v0.1"></script>-->
-    <!--<script src="https://cdn.rawgit.com/openprocurement-crypto/common/master/js/index.js"></script>-->
     <!--<script src="https://raw.githubusercontent.com/openprocurement-crypto/common/master/js/index.js"></script>-->
     <!--<script src="https://gitcdn.xyz/repo/openprocurement-crypto/common/master/js/index.js"></script>-->
     <!--<script src="http://vpn.unity-bars.com.ua/cdn/js/index.js?v0.2"></script>-->
@@ -17,6 +17,7 @@
 </head>
 <body>
 <span class="badge pull-right">v 1.0.4</span>
+<input type="checkbox" id="cbOnlyVerify" > <label for="cbOnlyVerify">Только проверка подписи, без GUI</label>
 <div class="text-left">
     <div class="btn-group">
         <button class="btn btn-info center-block" onclick="demo1()">Тендер UA-2016-02-07-000026-2</button>
@@ -29,7 +30,6 @@
     <div class="btn-group">
         <button class="btn btn-success center-block" onclick="demo5()">План UA-P-2016-03-22-000009-2</button>
         <button class="btn btn-warning center-block" onclick="demo6()">План UA-P-2016-03-23-000005-2</button>
-
     </div>
 </div>
 <!-- content before -->

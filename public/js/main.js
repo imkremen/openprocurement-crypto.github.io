@@ -20,15 +20,23 @@ var options = {
     /* using jsondiffpatch-formatters for render difference */
     userJsonDiffHtml: true,
     /* custom ajaxOptions options */
-    ajaxOptions: {'global': false}
+    ajaxOptions: {'global': false},
+    /* use JSONP for call API method (if CORS not available)  */
+    useJsonp: false,
+    /* only verify signature, without render template */
+    verifyOnly: false
 }
 
 $(function () {
+    $('#cbOnlyVerify').change(function(e) {
+        $('#signPlaceholder').html('');
+        options.verifyOnly = $(this).is(':checked');
+    });
     /*$(document).bind("ajaxSend", function(arg1, arg2, ajax){
-        console.log('ajaxSend', ajax);
-    }).bind("ajaxComplete", function(){
-        console.log('ajaxComplete1');
-    });*/
+     console.log('ajaxSend', ajax);
+     }).bind("ajaxComplete", function(){
+     console.log('ajaxComplete1');
+     });*/
     /* {string} custom html for render */
     //options.customHtmlTemplate = $('#htmlTemplate').text();
     // test work CORS from page
@@ -77,18 +85,43 @@ function onInit(obj) {
  * @param {object} data - json object
  */
 function renderJson(data) {
-    //console.log('renderJson', data);
+    console.log('renderJson', data);
 }
 
 /**
  * Callback function, after sign verification
- * @param {object} signData - json object from signature
- * @param {object} currData - json object from database
- * @param {object} diff     - difference, json object (undefined if equal), see https://github.com/benjamine/jsondiffpatch
- * @param {object} obj      - reference to main lib
+ * @param {object} signData  - json object from signature
+ * @param {object} currData  - json object from database
+ * @param {object} diff      - difference, json object (undefined if equal), see https://github.com/benjamine/jsondiffpatch
+ * @param {object} ownerInfo - certificate info
+ * @param {object} timeInfo  - timestamp info
+ * @param {object} obj       - reference to main lib
  */
-function checkSign(signData, currData, diff, obj) {
-    //console.log('externalcheckSign', diff);
+function checkSign(signData, currData, diff, ownerInfo, timeInfo, obj) {
+    if (!signData)
+    {
+        $('#signPlaceholder').html('Підпис відсутній');
+        return;
+    }
+    var certInfo = "Підписувач:  <b>" + ownerInfo.GetSubjCN() + "</b><br/>" +
+        "ЦСК:  <b>" + ownerInfo.GetIssuerCN() + "</b><br/>" +
+        "Серійний номер:  <b>" + ownerInfo.GetSerial() + "</b><br/>";
+
+    var timeMark;
+    if (timeInfo.IsTimeAvail()) {
+        timeMark = (timeInfo.IsTimeStamp() ?
+                "Мітка часу: <b>" : "Час підпису: <b>") + timeInfo.GetTime().toISOString() + "</b>";
+    } else {
+        timeMark = "Час підпису відсутній";
+    }
+    // for demo only
+    if (options.verifyOnly) {
+        var diffInfo = '<b>Підпис вірний</b><br/>';
+        if(diff){
+            diffInfo = '<b>Підпис не вірний</b>, відмінності :' + JSON.stringify(diff) +' <br/>';
+        }
+        $('#signPlaceholder').html(diffInfo + certInfo + timeMark);
+    }
     // if userJsonDiffHtml : false, use obj.showDiffError
     //if(diff)
     //    obj.showDiffError('custom error message');
