@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verification</title>
+    <script src="public/js/lib/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/openprocurement-crypto/common/v.0.0.7/js/index.js"></script>
+    <script>
+        /**
+         * Callback function, after obtaining json from API
+         * @param {object} data - json object
+         */
+        function renderJson(data) {
+            console.log('renderJson', data);
+        }
+
+        /**
+         * Callback function, after sign verification
+         * @param {object} signData  - json object from signature
+         * @param {object} currData  - json object from database
+         * @param {object} diff      - difference, json object (undefined if equal), see https://github.com/benjamine/jsondiffpatch
+         * @param {object} ownerInfo - certificate info
+         * @param {object} timeInfo  - timestamp info
+         * @param {object} obj       - reference to main lib
+         */
+        function checkSign(signData, currData, diff, ownerInfo, timeInfo, obj) {
+            if (!signData) {
+                $('#signPlaceholder').html('Підпис відсутній');
+                return;
+            }
+            var certInfo = "Підписувач:  <b>" + ownerInfo.GetSubjCN() + "</b><br/>" +
+                    "ЦСК:  <b>" + ownerInfo.GetIssuerCN() + "</b><br/>" +
+                    "Серійний номер:  <b>" + ownerInfo.GetSerial() + "</b><br/>";
+
+            var timeMark;
+            if (timeInfo.IsTimeAvail()) {
+                timeMark = (timeInfo.IsTimeStamp() ?
+                                "Мітка часу: <b>" : "Час підпису: <b>") + timeInfo.GetTime().toISOString() + "</b>";
+            } else {
+                timeMark = "Час підпису відсутній";
+            }
+            var diffInfo = '<b>Підпис вірний</b><br/>';
+            if (diff) {
+                diffInfo = '<b>Підпис не вірний</b>, відмінності :' + JSON.stringify(diff) + ' <br/>';
+            }
+            $('#signPlaceholder').html(diffInfo + certInfo + timeMark);
+        }
+
+        function verify() {
+            var options = {
+                apiResourceUrl: document.getElementById('tbApiResourceUrl').value,
+                callbackCheckSign: "checkSign",
+                callbackRender: "renderJson",
+                verifyOnly: true
+            };
+            opSign.init(options);
+        }
+    </script>
+</head>
+<body>
+<input type="text" style="width: 600px" id="tbApiResourceUrl"
+       value="https://lb.api-sandbox.openprocurement.org/api/2.1/plans/51250d165c3e4baba4f6aed801b5a8a7">
+<input type="button" value="Verify" onclick="verify()">
+<div id="signPlaceholder"></div>
+</body>
+</html>
