@@ -25,6 +25,7 @@ var options = {
     useJsonp: false,
     /* only verify signature, without render template */
     verifyOnly: false
+    //ignoreFields : ['documents']
 }
 
 $(function () {
@@ -49,7 +50,11 @@ $(function () {
 function beforeInit(obj) {
     //console.log('beforeInit', arguments);
     // override proxy
-    //URL_XML_HTTP_PROXY_SERVICE = "https://vpn.unity-bars.com.ua/proxy/ProxyHandler.ashx";
+    //URL_XML_HTTP_PROXY_SERVICE = "https://vpn.unity-bars.com.ua:40103/proxy/ProxyHandler.ashx";
+    //URL_XML_HTTP_PROXY_SERVICE = "http://192.168.147.145:8080/ProxyHandler.php";
+    //URL_XML_HTTP_PROXY_SERVICE = "http://52.34.154.100/ProxyHandler.php";
+    //URL_XML_HTTP_PROXY_SERVICE = "http://52.32.168.53/proxy.php";
+    //URL_XML_HTTP_PROXY_SERVICE = "https://prozorro.gov.ua/PH/ProxyHandler.php";
 
     // if using custom html template - can redefine elements id
     //obj.uiSignPanel = document.getElementById('signPanel'); // панель наложения подписи
@@ -115,7 +120,8 @@ function checkSign(signData, currData, diff, ownerInfo, timeInfo, obj) {
         timeMark = "Час підпису відсутній";
     }
     // for demo only
-    if (options.verifyOnly) {
+    if (options.verifyOnly)
+    {
         var diffInfo = '<b>Підпис вірний</b><br/>';
         if(diff){
             diffInfo = '<b>Підпис не вірний</b>, відмінності :' + JSON.stringify(diff) +' <br/>';
@@ -142,7 +148,7 @@ function postSign(signature) {
 
 // demo calls
 function demo1() {
-    options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/b64001cdaa1540e7a17c14d0207e3feb";
+    options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/2.2/tenders/3ba0bbc3395b43aaa45cce88e44f2325";//"https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/b64001cdaa1540e7a17c14d0207e3feb";
     opSign.init(options);
 }
 function demo2() {
@@ -161,7 +167,13 @@ function demo5() {
     options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/2.1/plans/8d80e519291c4b74930da8f8808489d7";
     opSign.init(options);
 }
+
 function demo6() {
     options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/2.1/plans/51250d165c3e4baba4f6aed801b5a8a7";
+    opSign.init(options);
+}
+
+function demo7() {
+    options.apiResourceUrl = "https://lb.api.openprocurement.org/api/0/tenders/818ee16c9eec4b6c95e73c2e7842fc7e";
     opSign.init(options);
 }
