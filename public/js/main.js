@@ -179,11 +179,5 @@ function demo7() {
 }
 
 function verify() {
-    var options = {
-        apiResourceUrl: document.getElementById('tbApiResourceUrl').value,
-        callbackCheckSign: "checkSign",
-        callbackRender: "renderJson",
-        verifyOnly: true
-    };
-    opSign.init(options);
+    demo(document.getElementById('tbApiResourceUrl').value);
 }
