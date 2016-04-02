@@ -24,8 +24,13 @@ var options = {
     /* use JSONP for call API method (if CORS not available)  */
     useJsonp: false,
     /* only verify signature, without render template */
-    verifyOnly: false
-    //ignoreFields : ['documents']
+    verifyOnly: false,
+    /* list of fields, witch will be ignored during verify */
+    //ignoreFields : //['documents']
+    /* disable loading data from apiResourceUrl on start */
+    disableLoadObj : false,
+    /* disable loading signature file from apiResourceUrl on start, only if disableLoadObj = false */
+    disableLoadSign : false
 }
 
 $(function () {
@@ -33,6 +38,7 @@ $(function () {
         $('#signPlaceholder').html('');
         options.verifyOnly = $(this).is(':checked');
     });
+    console.log("opSign.version = " + opSign.version);
     /*$(document).bind("ajaxSend", function(arg1, arg2, ajax){
      console.log('ajaxSend', ajax);
      }).bind("ajaxComplete", function(){
@@ -155,7 +161,7 @@ function demo(url){
 
 // demo calls
 function demo1() {
-    demo("https://lb.api-sandbox.openprocurement.org/api/2.2/tenders/3ba0bbc3395b43aaa45cce88e44f2325");
+        demo("https://lb.api-sandbox.openprocurement.org/api/2.2/tenders/3ba0bbc3395b43aaa45cce88e44f2325");
 }
 function demo2() {
     demo("https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/33681f0176574ea498fe2763dae9c124");
