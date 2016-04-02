@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Using digital signature</title>
     <script src="public/js/lib/jquery.min.js"></script>
+    <!--<script src="http://cdn.prozorro.org/openprocurement-crypto/sign/js/index.js"></script>-->
     <script src="https://cdn.rawgit.com/openprocurement-crypto/common/v.0.0.9/js/index.js"></script>
     <!--<script src="https://rawgit.com/openprocurement-crypto/common/master/js/index.js?v0.2"></script>-->
     <!--<script src="http://10.10.10.97:8083/js/index.js?v0.1"></script>-->
@@ -17,32 +18,55 @@
 </head>
 <body>
 <span class="badge pull-right">v 1.0.5</span>
-<input type="checkbox" id="cbOnlyVerify"> <label for="cbOnlyVerify">Только проверка подписи, без GUI</label>
-<div class="text-left">
-    <div class="btn-group">
-        <button class="btn btn-info center-block" onclick="demo7()">Тендер UA-2016-04-01-000008-c (prod)</button>
-    </div>
-</div>
-<div class="text-left" style="padding-top: 20px">
-    <div class="btn-group">
-        <button class="btn btn-info center-block" onclick="demo1()">Тендер UA-2016-02-07-000026-2</button>
-        <button class="btn btn-success center-block" onclick="demo2()">Тендер UA-2016-02-07-000027-2</button>
-        <button class="btn btn-warning center-block" onclick="demo3()">Тендер UA-2016-02-07-000028-2</button>
-        <button class="btn btn-warning center-block" onclick="demo4()">Тендер UA-2016-03-04-000030-2</button>
 
-    </div>
-</div>
-<div class="text-left" style="padding-top: 20px">
-    <div class="btn-group">
-        <button class="btn btn-success center-block" onclick="demo5()">План UA-P-2016-03-22-000009-2</button>
-        <button class="btn btn-warning center-block" onclick="demo6()">План UA-P-2016-03-23-000005-2</button>
-    </div>
-</div>
-<!-- content before -->
-<br/><br/>
-<div id="signPlaceholder"></div>
-<!-- content after -->
+<div class="container">
 
+    <div class="panel panel-default">
+        <div class="panel-heading">Check signature</div>
+        <div class="panel-body">
+            <input type="text" style="width: 900px" id="tbApiResourceUrl"
+                   value="https://public.api.openprocurement.org/api/2.2/tenders/3ada5c7f0ef94b07b45be08946d081e5">
+            <input type="button" value="Verify" class="btn btn-info pull-right" onclick="verify()">
+            <input type="checkbox" id="cbOnlyVerify"> <label for="cbOnlyVerify">without GUI</label>
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">Demo objects</div>
+        <div class="panel-body">
+            <div class="text-left">
+                <div class="btn-group">
+                    <button class="btn btn-info center-block" onclick="demo7()">Тендер UA-2016-04-01-000008-c (prod)
+                    </button>
+                </div>
+            </div>
+            <div class="text-left" style="padding-top: 20px">
+                <div class="btn-group">
+                    <button class="btn btn-info center-block" onclick="demo1()">Тендер UA-2016-02-07-000026-2</button>
+                    <button class="btn btn-success center-block" onclick="demo2()">Тендер UA-2016-02-07-000027-2
+                    </button>
+                    <button class="btn btn-warning center-block" onclick="demo3()">Тендер UA-2016-02-07-000028-2
+                    </button>
+                    <button class="btn btn-warning center-block" onclick="demo4()">Тендер UA-2016-03-04-000030-2
+                    </button>
+
+                </div>
+            </div>
+            <div class="text-left" style="padding-top: 20px">
+                <div class="btn-group">
+                    <button class="btn btn-success center-block" onclick="demo5()">План UA-P-2016-03-22-000009-2
+                    </button>
+                    <button class="btn btn-warning center-block" onclick="demo6()">План UA-P-2016-03-23-000005-2
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content before -->
+    <br/><br/>
+    <div id="signPlaceholder"></div>
+    <!-- content after -->
+</div>
 <script id="htmlTemplate" type="text/x-tmpl">
     <div class="container">
     <div class="panel panel-default">
@@ -135,6 +159,8 @@
         </div>
     </div>
 </div>
+
+
 
 </script>
 </body>

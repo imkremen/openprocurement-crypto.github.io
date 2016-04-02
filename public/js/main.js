@@ -82,6 +82,7 @@ function beforeInit(obj) {
  * Callback function, after init crypto libs
  */
 function onInit(obj) {
+
     //console.log('externalInit', arguments);
 }
 
@@ -146,34 +147,43 @@ function postSign(signature) {
     // setKeyStatus('Помилка при передачі підпису до ЦБД', 'error');
 }
 
+function demo(url){
+    $('#signPlaceholder').html('');
+    options.apiResourceUrl = url;
+    opSign.init(options);
+}
+
 // demo calls
 function demo1() {
-    options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/2.2/tenders/3ba0bbc3395b43aaa45cce88e44f2325";//"https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/b64001cdaa1540e7a17c14d0207e3feb";
-    opSign.init(options);
+    demo("https://lb.api-sandbox.openprocurement.org/api/2.2/tenders/3ba0bbc3395b43aaa45cce88e44f2325");
 }
 function demo2() {
-    options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/33681f0176574ea498fe2763dae9c124";
-    opSign.init(options);
+    demo("https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/33681f0176574ea498fe2763dae9c124");
 }
 function demo3() {
-    options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/9835f4f342f04b22aaaf2c40f25cfe80";
-    opSign.init(options);
+    demo("https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/9835f4f342f04b22aaaf2c40f25cfe80");
 }
 function demo4() {
-    options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/0.12/tenders/fae0de97deab4b289f0b53bb64e8e09b";
-    opSign.init(options);
+    demo("https://lb.api-sandbox.openprocurement.org/api/0.12/tenders/fae0de97deab4b289f0b53bb64e8e09b");
 }
 function demo5() {
-    options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/2.1/plans/8d80e519291c4b74930da8f8808489d7";
-    opSign.init(options);
+    demo("https://lb.api-sandbox.openprocurement.org/api/2.1/plans/8d80e519291c4b74930da8f8808489d7");
 }
 
 function demo6() {
-    options.apiResourceUrl = "https://lb.api-sandbox.openprocurement.org/api/2.1/plans/51250d165c3e4baba4f6aed801b5a8a7";
-    opSign.init(options);
+    demo("https://lb.api-sandbox.openprocurement.org/api/2.1/plans/51250d165c3e4baba4f6aed801b5a8a7");
 }
 
 function demo7() {
-    options.apiResourceUrl = "https://lb.api.openprocurement.org/api/0/tenders/818ee16c9eec4b6c95e73c2e7842fc7e";
+    demo("https://public.api.openprocurement.org/api/2.2/tenders/3ada5c7f0ef94b07b45be08946d081e5");
+}
+
+function verify() {
+    var options = {
+        apiResourceUrl: document.getElementById('tbApiResourceUrl').value,
+        callbackCheckSign: "checkSign",
+        callbackRender: "renderJson",
+        verifyOnly: true
+    };
     opSign.init(options);
 }
