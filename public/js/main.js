@@ -148,7 +148,7 @@ function postSign(signature) {
     //console.log('sendSign', signature);
     // todo post to server with sign
     // if  success
-    setKeyStatus('Підпису успішно накладено та передано у ЦБД', 'success');
+    setKeyStatus('Підпис успішно накладено та передано у ЦБД', 'success');
     // if error
     // setKeyStatus('Помилка при передачі підпису до ЦБД', 'error');
 }
