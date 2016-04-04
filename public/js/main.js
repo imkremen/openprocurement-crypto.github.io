@@ -28,13 +28,13 @@ var options = {
     /* list of fields, witch will be ignored during verify */
     //ignoreFields : //['documents']
     /* disable loading data from apiResourceUrl on start */
-    disableLoadObj : false,
+    disableLoadObj: false,
     /* disable loading signature file from apiResourceUrl on start, only if disableLoadObj = false */
-    disableLoadSign : false
+    disableLoadSign: false
 }
 
 $(function () {
-    $('#cbOnlyVerify').change(function(e) {
+    $('#cbOnlyVerify').change(function (e) {
         $('#signPlaceholder').html('');
         options.verifyOnly = $(this).is(':checked');
     });
@@ -92,6 +92,7 @@ function onInit(obj) {
     //console.log('externalInit', arguments);
 }
 
+
 /**
  * Callback function, after obtaining json from API
  * @param {object} data - json object
@@ -110,8 +111,10 @@ function renderJson(data) {
  * @param {object} obj       - reference to main lib
  */
 function checkSign(signData, currData, diff, ownerInfo, timeInfo, obj) {
-    if (!signData)
-    {
+    console.log('signData = %O', JSON.parse(signData));
+    console.log('currData = %O', JSON.parse(currData));
+    console.log('diff = %O', diff);
+    if (!signData) {
         $('#signPlaceholder').html('Підпис відсутній');
         return;
     }
@@ -127,11 +130,10 @@ function checkSign(signData, currData, diff, ownerInfo, timeInfo, obj) {
         timeMark = "Час підпису відсутній";
     }
     // for demo only
-    if (options.verifyOnly)
-    {
+    if (options.verifyOnly) {
         var diffInfo = '<b>Підпис вірний</b><br/>';
-        if(diff){
-            diffInfo = '<b>Підпис не вірний</b>, відмінності :' + JSON.stringify(diff) +' <br/>';
+        if (diff) {
+            diffInfo = '<b>Підпис не вірний</b>, відмінності :' + JSON.stringify(diff) + ' <br/>';
         }
         $('#signPlaceholder').html(diffInfo + certInfo + timeMark);
     }
@@ -153,7 +155,7 @@ function postSign(signature) {
     // setKeyStatus('Помилка при передачі підпису до ЦБД', 'error');
 }
 
-function demo(url){
+function demo(url) {
     $('#signPlaceholder').html('');
     options.apiResourceUrl = url;
     opSign.init(options);
@@ -161,7 +163,7 @@ function demo(url){
 
 // demo calls
 function demo1() {
-        demo("https://lb.api-sandbox.openprocurement.org/api/2.2/tenders/3ba0bbc3395b43aaa45cce88e44f2325");
+    demo("https://lb.api-sandbox.openprocurement.org/api/2.2/tenders/3ba0bbc3395b43aaa45cce88e44f2325");
 }
 function demo2() {
     demo("https://lb.api-sandbox.openprocurement.org/api/0.11/tenders/33681f0176574ea498fe2763dae9c124");
