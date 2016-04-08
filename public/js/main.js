@@ -185,6 +185,9 @@ function demo6() {
 function demo7() {
     demo("https://public.api.openprocurement.org/api/2.2/tenders/3ada5c7f0ef94b07b45be08946d081e5");
 }
+function demo8() {
+    demo("https://lb.api-sandbox.openprocurement.org/api/2.2/plans/58cd699c303b4c549e4790733ab9c735");
+}
 
 function verify() {
     demo(document.getElementById('tbApiResourceUrl').value);
