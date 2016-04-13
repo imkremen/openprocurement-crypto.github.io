@@ -39,6 +39,10 @@ $(function () {
         options.verifyOnly = $(this).is(':checked');
     });
     console.log("opSign.version = " + opSign.version);
+    if(location.search && location.search.indexOf('resourseUrl') >= 0){
+        document.getElementById('tbApiResourceUrl').value = location.search.substr(13);
+        verify();
+    }
     /*$(document).bind("ajaxSend", function(arg1, arg2, ajax){
      console.log('ajaxSend', ajax);
      }).bind("ajaxComplete", function(){
@@ -183,10 +187,13 @@ function demo6() {
 }
 
 function demo7() {
-    demo("https://public.api.openprocurement.org/api/2.2/tenders/3ada5c7f0ef94b07b45be08946d081e5");
+        demo("https://public.api.openprocurement.org/api/2.2/tenders/3ada5c7f0ef94b07b45be08946d081e5");
 }
 function demo8() {
     demo("https://lb.api-sandbox.openprocurement.org/api/2.2/plans/58cd699c303b4c549e4790733ab9c735");
+}
+function demo9() {
+    demo("http://192.168.147.147:6543/api/2.2/plans/74124d3a62974d1385be64aa9a7831aa");
 }
 
 function verify() {
