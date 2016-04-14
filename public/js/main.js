@@ -39,7 +39,7 @@ $(function () {
         options.verifyOnly = $(this).is(':checked');
     });
     console.log("opSign.version = " + opSign.version);
-    if(location.search && location.search.indexOf('resourseUrl') >= 0){
+    if (location.search && location.search.indexOf('resourceUrl') >= 0) {
         document.getElementById('tbApiResourceUrl').value = location.search.substr(13);
         verify();
     }
@@ -152,8 +152,18 @@ function checkSign(signData, currData, diff, ownerInfo, timeInfo, obj) {
  */
 function postSign(signature) {
     //console.log('sendSign', signature);
-    // todo post to server with sign
+
     // if  success
+    if(signature instanceof Array){
+        for(objId in signature){
+            var sign = signature[objId]; // подпись для плана с id=objId
+            // todo post to server with sign
+            console.log("signature for id=[%s], sign=%s...", objId, sign);
+        }
+    }
+    else {
+        // todo post to server with sign
+    }
     setKeyStatus('Підпис успішно накладено та передано у ЦБД', 'success');
     // if error
     // setKeyStatus('Помилка при передачі підпису до ЦБД', 'error');
@@ -187,13 +197,23 @@ function demo6() {
 }
 
 function demo7() {
-        demo("https://public.api.openprocurement.org/api/2.2/tenders/3ada5c7f0ef94b07b45be08946d081e5");
+    demo("https://public.api.openprocurement.org/api/2.2/tenders/3ada5c7f0ef94b07b45be08946d081e5");
 }
 function demo8() {
     demo("https://lb.api-sandbox.openprocurement.org/api/2.2/plans/58cd699c303b4c549e4790733ab9c735");
 }
 function demo9() {
     demo("http://192.168.147.147:6543/api/2.2/plans/74124d3a62974d1385be64aa9a7831aa");
+}
+
+function demo10() {
+    demo(["https://lb.api-sandbox.openprocurement.org/api/2.2/plans/a2a56f33937243639993f4f82bf20bb9",
+        "https://lb.api-sandbox.openprocurement.org/api/2.2/plans/484af204d4de4a8db260e3e8fc4b4a75",
+        "https://lb.api-sandbox.openprocurement.org/api/2.2/plans/77dcd4c8cb2d446e82f28d4bcaa1887d",
+        "https://lb.api-sandbox.openprocurement.org/api/2.2/plans/7b275166708049109581af54ed395821",
+        "https://lb.api-sandbox.openprocurement.org/api/2.2/plans/e4693e4be1a1418a800bbb262497842a",
+        "https://lb.api-sandbox.openprocurement.org/api/2.2/plans/0760fd069b164b468dad80e84a9536dc",
+        "https://lb.api-sandbox.openprocurement.org/api/2.2/plans/305db4a1c32040da92967815c27b6043"]);
 }
 
 function verify() {
