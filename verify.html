@@ -55,6 +55,14 @@
             };
             opSign.init(options);
         }
+        function demo9() {
+            //demo("http://192.168.147.147:6543/api/2.2/plans/74124d3a62974d1385be64aa9a7831aa");
+            console.log(1);
+            $.get( "https://public.api.openprocurement.org/api/2.2/tenders/6d86e0f71d804641b76ea7662bb7024f/documents/a695b57abc8742aeb8a224cc70907398?download=12e792b0e1dd417db80fe726a1851ec6", function( data ) {
+                console.log('data=%s', data.substr(60,60));
+            });
+            console.log(2);
+        }
     </script>
 </head>
 <body>
@@ -62,5 +70,7 @@
        value="https://lb.api-sandbox.openprocurement.org/api/2.1/plans/51250d165c3e4baba4f6aed801b5a8a7">
 <input type="button" value="Verify" onclick="verify()">
 <div id="signPlaceholder"></div>
+
+<button class="btn btn-warning center-block" onclick="demo9()">План local</button>
 </body>
 </html>
