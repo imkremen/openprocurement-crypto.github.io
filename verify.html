@@ -5,7 +5,7 @@
     <title>Verification</title>
     <script src="public/js/lib/jquery.min.js"></script>
     <!--<script src="public/js/lib/asn1.js"></script>-->
-    <script src="public/js/lib/base64.js"></script>
+    <!--<script src="public/js/lib/base64.js"></script>-->
     <script src="https://rawgit.com/openprocurement-crypto/common/master/js/index.js?v0.2"></script>
     <script>
         /**
@@ -71,6 +71,12 @@
                 success: function (data) {
                     document.getElementById("tbDownloadStorageUrl").value = xhr.responseURL;
                     console.log('data=%s', data.substr(60, 60));
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("jqXHR=%O", jqXHR);
+                    console.log("textStatus=%O", textStatus);
+                    console.log("errorThrown=%O", errorThrown);
+                    console.log("xhr.responseURL=%O", xhr.responseURL);
                 }
             });
 
