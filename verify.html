@@ -74,9 +74,11 @@
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log("jqXHR=%O", jqXHR);
+                    console.log("jqXHR.headers=%O", jqXHR.getAllResponseHeaders());
                     console.log("textStatus=%O", textStatus);
                     console.log("errorThrown=%O", errorThrown);
-                    console.log("xhr.responseURL=%O", xhr.responseURL);
+                    console.log(xhr);
+                    console.log(xhr.getAllResponseHeaders());
                 }
             });
 
