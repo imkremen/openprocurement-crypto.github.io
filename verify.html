@@ -65,9 +65,14 @@
             var origAjax = jQuery.ajaxSettings.xhr;
             jQuery.ajaxSettings.xhr = function () {
                 xhr = origAjax();
+                console.log('origAjax=%O', xhr);
                 return xhr;
             };
             jQuery.ajax(url, {
+                beforeSend: function( xhr ) {
+                    //xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+                    console.log("beforeSend=%O, responseURL=%s", xhr, xhr.responseURL);
+                },
                 success: function (data) {
                     document.getElementById("tbDownloadStorageUrl").value = xhr.responseURL;
                     console.log('data=%s', data.substr(60, 60));
