@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>Using digital signature</title>
     <script src="public/js/lib/jquery.min.js"></script>
-    <!--<script src="http://cdn.prozorro.org/openprocurement-crypto/sign/js/index.js"></script>-->
+    <script src="https://cdn2.prozorro.gov.ua/openprocurement-crypto/sign/js/index.js"></script>
+    <!--script src="https://cdn2.prozorro.gov.ua/openprocurement-crypto/sign/js/index.js"></script-->
     <!--<script src="https://cdn.rawgit.com/openprocurement-crypto/common/v.0.0.14/js/index.js"></script>-->
-    <script src="https://rawgit.com/openprocurement-crypto/common/master/js/index.js?v0.2"></script>
+    <!--<script src="https://cdn.rawgit.com/openprocurement-crypto/common/v.0.0.23/js/index.js"></script>-->
+    <!--<script src="https://rawgit.com/openprocurement-crypto/common/master/js/index.js?v0.2"></script>-->
     <!--<script src="http://10.10.10.97:8083/js/index.js?v0.1"></script>-->
     <!--<script src="https://raw.githubusercontent.com/openprocurement-crypto/common/master/js/index.js"></script>-->
     <!--<script src="https://gitcdn.xyz/repo/openprocurement-crypto/common/master/js/index.js"></script>-->
@@ -25,7 +27,7 @@
         <div class="panel-heading">Check signature</div>
         <div class="panel-body">
             <input type="text" style="width: 900px" id="tbApiResourceUrl"
-                   value="https://public.api.openprocurement.org/api/2.2/tenders/6d86e0f71d804641b76ea7662bb7024f">
+                   value="https://lb.api-sandbox.openprocurement.org/api/2.2/tenders/7c28fc809c4c48c789693ce7c2c4dbe1">
             <input type="button" value="Verify" class="btn btn-info pull-right" onclick="verify()">
             <input type="checkbox" id="cbOnlyVerify"> <label for="cbOnlyVerify">without GUI</label>
         </div>
@@ -60,8 +62,8 @@
                     </button>
                     <button class="btn btn-warning center-block" onclick="demo8()">План UA-P-2016-04-08-000002-1
                     </button>
-
-
+                    <button class="btn btn-warning center-block" onclick="demo10()">Планы (array)
+                    </button>
                 </div>
             </div>
         </div>
