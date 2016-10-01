@@ -61,17 +61,23 @@
             var url = document.getElementById("tbDownloadUrl").value;
             if (document.getElementById("tbDownloadStorageUrl").value)
                 url = document.getElementById("tbDownloadStorageUrl").value;
+
+            $.get(url, function (data, status, xhr) {
+                console.log('data=%O, response=%O', data.substr(60,60), xhr);
+            });
+            return;
+
+            if (document.getElementById("tbDownloadStorageUrl").value)
+                url = document.getElementById("tbDownloadStorageUrl").value;
             var xhr;
             var origAjax = jQuery.ajaxSettings.xhr;
             jQuery.ajaxSettings.xhr = function () {
                 xhr = origAjax();
-                console.log('origAjax=%O', xhr);
                 return xhr;
             };
             jQuery.ajax(url, {
-                beforeSend: function( xhr ) {
-                    //xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
-                    console.log("beforeSend=%O, responseURL=%s", xhr, xhr.responseURL);
+                xhrFields: {
+                    withCredentials: false
                 },
                 success: function (data) {
                     document.getElementById("tbDownloadStorageUrl").value = xhr.responseURL;
@@ -103,6 +109,15 @@
             });
             console.log('end');
         }
+
+        function demo2() {
+            $.get("http://a.ihatesafari.com", function (data, status, xhr) {
+                //console.log('data=%O, response=%O', data.substr(60,60), xhr);
+                console.log(data.redirect);
+                console.log(xhr.getResponseHeader('Location'));
+                console.log(xhr.getResponseHeader('Host'));
+            });
+        }
     </script>
 </head>
 <body>
@@ -112,8 +127,9 @@
 <div id="signPlaceholder"></div>
 
 <input type="text" style="width: 600px" id="tbDownloadUrl"
-       value="https://public.api.openprocurement.org/api/2.2/tenders/6d86e0f71d804641b76ea7662bb7024f/documents/a695b57abc8742aeb8a224cc70907398?download=12e792b0e1dd417db80fe726a1851ec6">
-<input type="text" style="width: 600px" id="tbDownloadStorageUrl">
+       value="http://10.10.10.97/testcors/handler.ashx">
+<input type="text" style="width: 600px" id="tbDownloadStorageUrl" value="https://public.api.openprocurement.org/api/2.2/tenders/6d86e0f71d804641b76ea7662bb7024f/documents/a695b57abc8742aeb8a224cc70907398?download=12e792b0e1dd417db80fe726a1851ec6">
 <button class="btn btn-warning center-block" onclick="download()">download</button>
+<button class="btn btn-warning center-block" onclick="demo2()">test</button>
 </body>
 </html>

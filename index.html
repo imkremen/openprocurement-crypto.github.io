@@ -4,42 +4,43 @@
     <meta charset="UTF-8">
     <title>Using digital signature</title>
     <script src="public/js/lib/jquery.min.js"></script>
-    <script src="https://cdn2.prozorro.gov.ua/openprocurement-crypto/sign/js/index.js"></script>
-    <!--script src="https://cdn2.prozorro.gov.ua/openprocurement-crypto/sign/js/index.js"></script-->
+    <!--<script src="https://cdn2.prozorro.gov.ua/openprocurement-crypto/sign/js/index.js"></script>-->
     <!--<script src="https://cdn.rawgit.com/openprocurement-crypto/common/v.0.0.14/js/index.js"></script>-->
-    <!--<script src="https://cdn.rawgit.com/openprocurement-crypto/common/v.0.0.23/js/index.js"></script>-->
-    <!--<script src="https://rawgit.com/openprocurement-crypto/common/master/js/index.js?v0.2"></script>-->
+    <!--<script src="https://cdn.rawgit.com/openprocurement-crypto/common/v.0.0.24/js/index.js"></script>-->
+    <script src="https://rawgit.com/openprocurement-crypto/common/master/js/index.js?v0.2"></script>
     <!--<script src="http://10.10.10.97:8083/js/index.js?v0.1"></script>-->
     <!--<script src="https://raw.githubusercontent.com/openprocurement-crypto/common/master/js/index.js"></script>-->
     <!--<script src="https://gitcdn.xyz/repo/openprocurement-crypto/common/master/js/index.js"></script>-->
     <!--<script src="http://vpn.unity-bars.com.ua/cdn/js/index.js?v0.2"></script>-->
-
     <script src="public/js/main.js"></script>
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/jsondiffpatch_html.css">
 </head>
 <body>
-<span class="badge pull-right">v 1.0.8</span>
+<span class="badge pull-right">v 1.0.9</span>
 
 <div class="container">
-
     <div class="panel panel-default">
         <div class="panel-heading">Check signature</div>
         <div class="panel-body">
             <input type="text" style="width: 900px" id="tbApiResourceUrl"
-                   value="https://lb.api-sandbox.openprocurement.org/api/2.2/tenders/7c28fc809c4c48c789693ce7c2c4dbe1">
+                   value="https://public.api.openprocurement.org/api/2.3/tenders/44e5ae715bd742bfb6a96d97b7112736">
             <input type="button" value="Verify" class="btn btn-info pull-right" onclick="verify()">
             <input type="checkbox" id="cbOnlyVerify"> <label for="cbOnlyVerify">without GUI</label>
         </div>
     </div>
-
-    <div class="panel panel-info">
+    <div class="panel panel-info hidden">
         <div class="panel-heading">Demo objects</div>
         <div class="panel-body">
             <div class="text-left">
                 <div class="btn-group">
                     <button class="btn btn-info center-block" onclick="demo7()">Тендер UA-2016-04-01-000008-c (prod)
                     </button>
+                    <button class="btn btn-info center-block" onclick="signWithLocalCheck()">Sign bid
+                    </button>
+                    <button class="btn btn-info center-block" onclick="checkInvalidCert()">Check invalid cert
+                    </button>
+
                 </div>
             </div>
             <div class="text-left" style="padding-top: 20px">
@@ -69,7 +70,6 @@
         </div>
     </div>
     <!-- content before -->
-    <br/><br/>
     <div id="signPlaceholder"></div>
     <!-- content after -->
 </div>
@@ -165,6 +165,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 
