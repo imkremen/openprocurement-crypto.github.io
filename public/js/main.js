@@ -227,13 +227,7 @@ function checkInvalidCert(){
 }
 
 function demo10() {
-    demo(["https://lb.api-sandbox.openprocurement.org/api/2.3/plans/81b2c33d7e194da39cde178d0000ded8",
-        "https://lb.api-sandbox.openprocurement.org/api/2.3/plans/c8f668b98fae4c3eb849f2519eb87cdb",
-        "https://lb.api-sandbox.openprocurement.org/api/2.3/plans/9a58af83440b4a43a7670e6e54ec2e49",
-        "https://lb.api-sandbox.openprocurement.org/api/2.3/plans/bbe945f79f414e7f899d68b743d47dea",
-        "https://lb.api-sandbox.openprocurement.org/api/2.3/plans/480607c96bd64ff9a16b48a9e5b8800c",
-        "https://lb.api-sandbox.openprocurement.org/api/2.3/plans/425c2dbefba9462587f660969487b396",
-        "https://lb.api-sandbox.openprocurement.org/api/2.3/plans/c77cc95bbbe84086b0a498c7b1f10939"]);
+    demo(["https://lb.api.openprocurement.org/api/0/plans/49ed9846578e410780f3c3e66121dbe1"]);
 }
 
 function verify() {
