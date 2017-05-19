@@ -33,6 +33,14 @@ var options = {
     disableLoadSign: false
 }
 
+Array.prototype.max = function() {
+    return Math.max.apply(null, this);
+};
+
+Array.prototype.min = function() {
+    return Math.min.apply(null, this);
+};
+
 function dateToString(date) {
     var dateStr =
         ('0' + date.getDate()).slice(-2) + '.' +
@@ -166,22 +174,20 @@ function checkSign(signData, currData, diff, ownerInfo, timeInfo, obj) {
  * @param {string} signature - base64 string with CMS signature
  */
 function postSign(signature) {
-    //console.log('sendSign', signature);
-
     // if  success
     if(signature instanceof Array){
         for(objId in signature){
+            if(!signature.hasOwnProperty(objId)) continue;
             var sign = signature[objId]; // подпись для плана с id=objId
-            // todo post to server with sign
             console.log("signature for id=[%s], sign=%s...", objId, sign);
+            // todo post to server with sign
         }
     }
     else {
+        console.log('signature %s', signature);
         // todo post to server with sign
     }
     setKeyStatus('Підпис успішно накладено та передано у ЦБД', 'success');
-    // if error
-    // setKeyStatus('Помилка при передачі підпису до ЦБД', 'error');
 }
 
 function demo(url) {
